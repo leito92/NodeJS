@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "name": "Camiseta blanca",
+        "info": {
+            "description": "",
+            "stock": 1
+        }
+    },
+    {
+        "id": "2",
+        "name": "Zapatilla deportiva",
+        "info": {
+            "description": "",
+            "stock": 1
+        }
+    }
+]
