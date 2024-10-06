@@ -1,4 +1,4 @@
-import Product from '../models/mongoDB/product.js'
+import Product from '../models/mongoDB/Product.js'
 
 export const productController = {
     async getAll(req, res){
@@ -24,6 +24,22 @@ export const productController = {
                 res.status(200).json({success: true, data: products})
                 :
                 res.status(404).json({success: false, message: `products not found with '${name}' name`})  
+        } catch (error) {
+                res.status(500).json({success: false, message: 'Internal Server Error'})
+        }
+    },
+
+    async getById(req, res) {
+        const  id  = req.params.id
+        if(!id){
+            return res.status(400).json({success: false, message: "missing id"})
+        }
+        try {
+            const product = await Product.findById(id)
+            product?
+                res.status(200).json({success: true, data: product})
+                :
+                res.status(404).json({success: false, message: `product not found with '${id}' id`})  
         } catch (error) {
                 res.status(500).json({success: false, message: 'Internal Server Error'})
         }
@@ -60,7 +76,7 @@ export const productController = {
             if(!product) {
                 return res.status(404).json({success: false, message: "product not found"})
             }
-            res.status(204)
+            res.send(204)
         } catch (error) {
             res.status(500).json({success: false, message: 'Internal Server Error'})
         }
